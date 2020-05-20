@@ -1,37 +1,25 @@
 {
-  "name": "server",
+  "name": "react-node-fullstack-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace client start:dev",
+    "server": "yarn workspace server start:dev",
+    "start": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\"",
+    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "npm run build"
+  },
   "jest": {
     "setupTestFrameworkScriptFile": "./tests/setup.js"
   },
-  "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js --ignore tests",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "heroku-postbuild": "npm run build",
-    "test": "jest"
-  },
-  "author": "",
-  "license": "ISC",
+  "repository": "https://github.com/devvratshukla/react-node-fullstack-app.git",
+  "author": "Devvrat Shukla <devvratshukla@gmail.com>",
+  "license": "UNLICENSED",
   "dependencies": {
-    "aws-sdk": "^2.680.0",
-    "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
-    "cookie-session": "^2.0.0-beta.2",
-    "express": "^4.17.1",
-    "jest": "^26.0.1",
-    "migrate-mongoose": "^4.0.0",
-    "mongoose": "^5.9.15",
-    "nodemon": "^2.0.4",
-    "passport": "^0.4.1",
-    "passport-google-oauth20": "^2.0.0",
-    "path-parser": "^6.1.0",
-    "puppeteer": "^3.1.0",
-    "redis": "^3.0.2",
-    "uuid": "^8.0.0"
+    "jest": "^24.9.0"
   }
 }
